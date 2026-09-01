@@ -1,0 +1,44 @@
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+
+import categoryRoutes from "./routes/category.routes.ts";
+import authRoutes from "./routes/auth.routes.ts"
+import cartRoutes from "./routes/cart.routes.ts"
+import productRoutes from "./routes/product.routes.ts"
+import orderRoutes from "./routes/order.routes.ts"
+import addressRouter from "./routes/address.routes.ts"
+dotenv.config();
+
+const app = express();
+
+const PORT = process.env.PORT || 5001;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use("/api/categories", categoryRoutes);
+
+// Auth Routes
+app.use("/api/auth",authRoutes)
+
+// Category Routes
+app.use("/api/category",categoryRoutes)
+
+//Cart Routes
+app.use("/api/cart",cartRoutes)
+
+//Product Routes
+app.use("/api/product",productRoutes)
+
+//Order Routes
+app.use("/api/order",orderRoutes)
+
+// Address Router
+app.use("/api/address",addressRouter)
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
