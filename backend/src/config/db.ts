@@ -1,3 +1,4 @@
+// this is for postgres connection only
 import pg from "pg";
 import dotenv from "dotenv";
 
