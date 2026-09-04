@@ -1,7 +1,72 @@
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import Login from "./pages/Login";
+import SelectRole from "./pages/SelectRole";
+import Home from "./pages/HomePage";
+import useAuthStore from "./store/authstore";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./config/firebase";
+import { checkAuth } from "./api/authApi";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLayout from "./components/admin/AdminLayout";
 
 function App() {
-  return <Login />;
+  const authstore = useAuthStore()
+
+    useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      try {
+        if (!firebaseUser) {
+          authstore.logout();
+          authstore.setLoading(false);
+          return;
+        }
+
+        const token = await firebaseUser.getIdToken();
+
+        const data = await checkAuth(token);
+
+        console.log("Session restored:", data);
+
+        authstore.setAuth(data.user, data.user.role,token);
+        authstore.setLoading(false);
+      } catch (error) {
+        console.error("Session restoration failed:", error);
+
+        authstore.logout();
+        authstore.setLoading(false);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+  return (
+    <Routes>
+      <Route path="/select-role" element={<SelectRole />} />
+      <Route path="/login" element={<Login />} /> 
+      <Route path="/" element={<Navigate to="/select-role" replace />}/>
+    <Route path="/home" 
+      element={
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      }/>
+
+      <Route path="/admin/dashboard"
+      element={
+        <AdminProtectedRoute>
+          <AdminLayout>  
+            {/* admin layout accept childern */}
+            <AdminDashboard/>
+          </AdminLayout>
+        </AdminProtectedRoute>
+      }>
+      </Route>
+   
+    </Routes>
+  );
 }
 
 export default App;

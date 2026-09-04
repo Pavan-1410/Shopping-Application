@@ -6,7 +6,7 @@ import { addCategory, getAllCategories, getCategoryById } from "../controllers/c
 
 const router = Router()
 
-router.post("/add",verifyFirebaseToken,loadApplicationUser,requireAdmin,addCategory)
+router.post("/add",verifyFirebaseToken,loadApplicationUser,requireAdmin,addCategory)  // create category
 router.get("/get",getAllCategories)
 router.get("/getbyid/:categoryId",getCategoryById)
 
