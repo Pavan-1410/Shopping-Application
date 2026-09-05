@@ -41,7 +41,16 @@ export const getMe = async (req: Request, res: Response) => {
 // to check auth while the user refresh
 export const checkAuth = (req:Request,res:Response)=>{
     try{
-        res.status(200).json(req.user)
+        if (!req.appUser) {
+            return res.status(404).json({
+                message: "Application user not found",
+            });
+        }
+
+        res.status(200).json({
+            message: "Authenticated successfully",
+            user: req.appUser,
+        });
     }catch(error){
         console.log("Error in checkAuth controller",error)
         res.status(500).json({msg:"Internal Server Error"})

@@ -10,7 +10,7 @@ const router = Router()
 
 router.get("/get",verifyFirebaseToken,loadApplicationUser,getAllProducts)
 router.get("/get/:productId",verifyFirebaseToken,loadApplicationUser,getProductById)
-router.post("/add",verifyFirebaseToken,loadApplicationUser,requireAdmin,upload.single("image"),createProduct)
+router.post("/add",verifyFirebaseToken,loadApplicationUser,requireAdmin,upload.single("image"),createProduct)// upload.single is multer middleware 
 router.put("/update/:productId",verifyFirebaseToken,loadApplicationUser,requireAdmin,upload.single("image"),updateProduct)
 router.delete("/delete/:productId",verifyFirebaseToken,loadApplicationUser,requireAdmin,deleteProduct)
 
