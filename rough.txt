@@ -13,3 +13,5 @@ type use kela ani express.d.ts file close asel tr error yet aahe
 lib folder - Put initialized libraries or reusable infrastructure that your application uses. - query client of tanstack
 
 config folder - connects db and external services
+
+is form data and multer are options to each other

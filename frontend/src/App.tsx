@@ -11,6 +11,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminLayout from "./components/admin/AdminLayout";
+import AdminProducts from "./pages/AdminProducts";
+import AdminProductDetails from "./pages/AdminProductDetails";
+import AdminCategory from "./pages/AdminCategory";
+import AdminOrders from "./pages/AdminOrders";
 
 function App() {
   const authstore = useAuthStore()
@@ -64,7 +68,38 @@ function App() {
         </AdminProtectedRoute>
       }>
       </Route>
-   
+
+      <Route path="/admin/products" element={
+        <AdminProtectedRoute>
+          <AdminLayout>
+            <AdminProducts />
+          </AdminLayout>
+        </AdminProtectedRoute>
+      } />
+
+      <Route path="/admin/products/:productId" element={
+        <AdminProtectedRoute>
+          <AdminLayout>
+            <AdminProductDetails />
+          </AdminLayout>
+        </AdminProtectedRoute>
+      } />
+
+      <Route path="/admin/categories" element={
+        <AdminProtectedRoute>
+          <AdminLayout>
+            <AdminCategory/>
+          </AdminLayout>
+        </AdminProtectedRoute>
+      }/>
+      <Route path="/admin/orders" element={
+        <AdminProtectedRoute>
+          <AdminLayout>
+            <AdminOrders/>
+          </AdminLayout>
+        </AdminProtectedRoute>
+      }/>
+  
     </Routes>
   );
 }

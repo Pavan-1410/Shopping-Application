@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
-
 import {
   LayoutDashboard,
   Package,
@@ -19,7 +18,6 @@ const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
-
   const logout = useAuthStore((state) => state.logout);
 
   const navLinks = [
@@ -48,9 +46,7 @@ const AdminSidebar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-
       logout();
-
       navigate("/login");
     } catch (err) {
       console.error("Logout failed:", err);
@@ -63,16 +59,11 @@ const AdminSidebar = () => {
           MOBILE TOP BAR
           Visible only below lg
       ===================================================== */}
-
       <div className="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between bg-blue-700 px-4 text-white shadow-md lg:hidden">
         {/* Logo */}
-
         <div className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-400">
-            <ShoppingCart
-              size={18}
-              className="text-blue-700"
-            />
+            <ShoppingCart size={18} className="text-blue-700" />
           </div>
 
           <h2 className="text-lg font-bold">
@@ -81,7 +72,6 @@ const AdminSidebar = () => {
         </div>
 
         {/* Menu button */}
-
         <button
           onClick={() => setIsOpen(true)}
           aria-label="Open menu"
@@ -94,7 +84,6 @@ const AdminSidebar = () => {
       {/* =====================================================
           MOBILE OVERLAY
       ===================================================== */}
-
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -104,31 +93,50 @@ const AdminSidebar = () => {
 
       {/* =====================================================
           SIDEBAR
-      ===================================================== */}
+          
+          Mobile:
+          - fixed
+          - slide in/out
 
+          Desktop:
+          - fixed to the viewport while page content scrolls
+      ===================================================== */}
       <aside
         className={`
-          fixed left-0 top-0 z-50
-          flex h-screen w-64 flex-col
-          bg-blue-700 text-white shadow-xl
+          flex
+          h-screen
+          w-64
+          shrink-0
+          flex-col
+          bg-blue-700
+          text-white
+          shadow-xl
 
-          transition-transform duration-300 ease-in-out
-
+          /* Mobile */
+          fixed
+          left-0
+          top-0
+          z-50
+          transition-transform
+          duration-300
+          ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full"}
 
-          lg:static
+          /* Desktop */
+          lg:fixed
+          lg:left-0
+          lg:top-0
           lg:z-auto
           lg:translate-x-0
+          lg:shadow-none
         `}
       >
         {/* =====================================================
             LOGO SECTION
         ===================================================== */}
-
         <div className="flex items-center justify-between border-b border-blue-500 px-6 py-6">
           <div className="flex items-center gap-2">
             {/* Logo icon */}
-
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-yellow-400">
               <ShoppingCart
                 size={20}
@@ -137,7 +145,6 @@ const AdminSidebar = () => {
             </div>
 
             {/* Logo text */}
-
             <div>
               <h2 className="text-xl font-bold">
                 Shopping<span className="text-yellow-400">.</span>
@@ -149,10 +156,7 @@ const AdminSidebar = () => {
             </div>
           </div>
 
-          {/* =================================================
-              MOBILE CLOSE BUTTON
-          ================================================= */}
-
+          {/* Mobile close button */}
           <button
             onClick={() => setIsOpen(false)}
             aria-label="Close menu"
@@ -165,7 +169,6 @@ const AdminSidebar = () => {
         {/* =====================================================
             NAVIGATION
         ===================================================== */}
-
         <nav className="flex-1 px-4 py-6">
           <div className="space-y-2">
             {navLinks.map(({ to, label, icon: Icon }) => (
@@ -174,9 +177,12 @@ const AdminSidebar = () => {
                 to={to}
                 onClick={() => setIsOpen(false)}
                 className="
-                  flex items-center gap-3
+                  flex
+                  items-center
+                  gap-3
                   rounded-lg
-                  px-4 py-3
+                  px-4
+                  py-3
                   font-medium
                   transition
                   hover:bg-blue-600
@@ -193,14 +199,17 @@ const AdminSidebar = () => {
         {/* =====================================================
             LOGOUT
         ===================================================== */}
-
         <div className="border-t border-blue-500 p-4">
           <button
             onClick={handleLogout}
             className="
-              flex w-full items-center gap-3
+              flex
+              w-full
+              items-center
+              gap-3
               rounded-lg
-              px-4 py-3
+              px-4
+              py-3
               font-medium
               transition
               hover:bg-blue-600
