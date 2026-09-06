@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import Login from "./pages/Login";
 import SelectRole from "./pages/SelectRole";
-import Home from "./pages/HomePage";
+import Home from "./pages/user/HomePage";
 import useAuthStore from "./store/authstore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./config/firebase";
@@ -15,6 +15,11 @@ import AdminProducts from "./pages/AdminProducts";
 import AdminProductDetails from "./pages/AdminProductDetails";
 import AdminCategory from "./pages/AdminCategory";
 import AdminOrders from "./pages/AdminOrders";
+import ProductDetails from "./pages/user/ProductDetails";
+import Cart from "./pages/user/Cart";
+import Checkout from "./pages/user/Checkout";
+import MyOrders from "./pages/user/MyOrders";
+import OrderDetails from "./pages/user/OrderDetails";
 
 function App() {
   const authstore = useAuthStore()
@@ -55,6 +60,41 @@ function App() {
       element={
         <ProtectedRoute>
           <Home />
+        </ProtectedRoute>
+      }/>
+    <Route path="/product/:productId" 
+      element={
+        <ProtectedRoute>
+          <ProductDetails />
+        </ProtectedRoute>
+      }/>
+    <Route path="/cart" 
+      element={
+        <ProtectedRoute>
+          <Cart/>
+        </ProtectedRoute>
+      }/>
+      <Route path="/checkout" element={
+        <ProtectedRoute>
+          <Checkout />
+        </ProtectedRoute>
+        } />
+    <Route path="/product/:productId" 
+      element={
+        <ProtectedRoute>
+          <ProductDetails />
+        </ProtectedRoute>
+      }/>
+    <Route path="/orders" 
+      element={
+        <ProtectedRoute>
+          <MyOrders />
+        </ProtectedRoute>
+      }/>
+    <Route path="/orders/:orderId" 
+      element={
+        <ProtectedRoute>
+          <OrderDetails />
         </ProtectedRoute>
       }/>
 

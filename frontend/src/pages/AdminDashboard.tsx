@@ -3,7 +3,7 @@ import {
   Package,
   ShoppingCart,
   Tags,
-} from "lucide-react"; // 👈 removed Users import, no longer needed
+} from "lucide-react";
 
 import { getAllCategories, getAllOrders, getAllProducts } from "../api/adminApi";
 import useAuthStore from "../store/authstore";

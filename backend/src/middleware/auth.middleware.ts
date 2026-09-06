@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getAuth } from "firebase-admin/auth";
-import firebaseAdmin from "../config/firebase";
+import firebaseAdmin from "../config/firebase.js";
 
 export const verifyFirebaseToken = async (
   req: Request,

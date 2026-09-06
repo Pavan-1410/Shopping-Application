@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { verifyFirebaseToken } from "../middleware/auth.middleware";
-import { loadApplicationUser } from "../middleware/user.middleware";
-import { requireAdmin } from "../middleware/role.middleware";
-import { addCategory, getAllCategories, getCategoryById } from "../controllers/category.controller";
+import { verifyFirebaseToken } from "../middleware/auth.middleware.js";
+import { loadApplicationUser } from "../middleware/user.middleware.js";
+import { requireAdmin } from "../middleware/role.middleware.js";
+import { addCategory, getAllCategories, getCategoryById } from "../controllers/category.controller.js";
 
 const router = Router()
 

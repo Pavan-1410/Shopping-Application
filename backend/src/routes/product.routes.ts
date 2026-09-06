@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from "../controllers/product.controller";
-import { verifyFirebaseToken } from "../middleware/auth.middleware";
-import { loadApplicationUser } from "../middleware/user.middleware";
-import { requireAdmin } from "../middleware/role.middleware";
+import { createProduct, deleteProduct, getAllProducts, getProductById, updateProduct } from "../controllers/product.controller.js";
+import { verifyFirebaseToken } from "../middleware/auth.middleware.js";
+import { loadApplicationUser } from "../middleware/user.middleware.js";
+import { requireAdmin } from "../middleware/role.middleware.js";
 import upload from "../middleware/upload.middleware.js";
 
 const router = Router()

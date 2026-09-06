@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { createAddressController, getAddressByIdController, getAllAddressController } from "../controllers/address.controller";
-import { verifyFirebaseToken } from "../middleware/auth.middleware";
-import { loadApplicationUser } from "../middleware/user.middleware";
+import { createAddressController, getAddressByIdController, getAllAddressController } from "../controllers/address.controller.js";
+import { verifyFirebaseToken } from "../middleware/auth.middleware.js";
+import { loadApplicationUser } from "../middleware/user.middleware.js";
 
 const router = Router()
 

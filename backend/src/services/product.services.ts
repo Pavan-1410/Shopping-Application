@@ -1,4 +1,4 @@
-import pool from "../config/db";
+import pool from "../config/db.js";
 import { CreateProductInput, Product } from "../types/products.types.js";
 import { findCategoryById } from "./category.service.js";
 

@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { addProductToCart, getCart, removeProductFromCart, updateCartItemController } from "../controllers/cart.controllers";
-import { verifyFirebaseToken } from "../middleware/auth.middleware";
-import { loadApplicationUser } from "../middleware/user.middleware";
+import { addProductToCart, getCart, removeProductFromCart, updateCartItemController } from "../controllers/cart.controllers.js";
+import { verifyFirebaseToken } from "../middleware/auth.middleware.js";
+import { loadApplicationUser } from "../middleware/user.middleware.js";
 
 const router = Router();
 
