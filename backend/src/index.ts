@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5001;
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:4173",
-  "https://your-frontend.onrender.com",
+  "https://shopping-application-v4q2.vercel.app",
 ];
 
 app.use(
