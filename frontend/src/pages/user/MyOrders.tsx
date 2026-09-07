@@ -53,7 +53,7 @@ const handlePayment = async (token: string, orderId: string) => {
     const razorpayOrder = await createPayment(token, orderId);
 
     const options = {
-      key: "rzp_test_TZ6GbWdiQg0fFN",
+      key:import.meta.env.VITE_RAZORPAY_KEY,
       amount: razorpayOrder.amount,
       currency: razorpayOrder.currency,
       order_id: razorpayOrder.id,
