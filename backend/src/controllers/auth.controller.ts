@@ -52,7 +52,7 @@ export const checkAuth = (req:Request,res:Response)=>{
             user: req.appUser,
         });
     }catch(error){
-        console.log("Error in checkAuth controller",error)
+       
         res.status(500).json({msg:"Internal Server Error"})
     }
 }

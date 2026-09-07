@@ -41,10 +41,7 @@ export const createOrderController = async (req: Request,res: Response) => {
       order,
     });
   } catch (error) {
-    console.log(
-      "Error in order controller, createOrder",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -70,10 +67,7 @@ export const getOrdersController = async (req: Request,res: Response) => {
       orders,
     });
   } catch (error) {
-    console.log(
-      "Error in order controller, getOrders",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -116,10 +110,6 @@ export const getOrderByIdController = async (req: Request, res: Response) => {
       order,
     });
   } catch (error) {
-    console.log(
-      "Error in order controller, getOrderById",
-      error
-    );
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -165,10 +155,7 @@ export const getOrderItemsController = async (req: Request,res: Response) => {
       items,
     });
   } catch (error) {
-    console.log(
-      "Error in order controller, getOrderItems",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -220,10 +207,7 @@ export const updateOrderStatusController = async (req: Request,res: Response) =>
       order,
     });
   } catch (error) {
-    console.log(
-      "Error in order controller, updateOrderStatus",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",

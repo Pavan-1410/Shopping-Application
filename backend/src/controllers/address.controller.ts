@@ -109,11 +109,6 @@ export const createAddressController = async (req:Request,res:Response)=> {
         });
 
     } catch (error) {
-        console.log(
-        "Error in address controller, createAddress",
-        error
-        );
-
         return res.status(500).json({
         message: "Internal Server Error",
         });
@@ -137,11 +132,6 @@ export const getAllAddressController = async (req:Request,res:Response)=>{
         result,
         });
     } catch (error) {
-        console.log(
-        "Error in address controller, getAllAddressController",
-        error
-        );
-
         return res.status(500).json({
         message: "Internal Server Error",
         });
@@ -179,10 +169,7 @@ export const getAddressByIdController = async (req: Request, res: Response) => {
       address,
     });
   } catch (error) {
-    console.log(
-      "Error in address controller, getAddressById",
-      error
-    );
+
     return res.status(500).json({
       message: "Internal Server Error",
     });

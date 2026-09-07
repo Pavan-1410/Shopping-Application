@@ -24,7 +24,6 @@ export const addCategory = async (req:Request,res:Response)=>{
         })
 
   } catch (error) {
-    console.log("error in category controller, addCategory",error)
     return res.status(500).json({
       message : "Internal Server Error",
     })
@@ -39,7 +38,6 @@ export const getAllCategories = async(req:Request,res:Response)=>{
         categories
       })
   } catch (error) {
-    console.log("error in category controller,getAllCategories ",error)
     return res.status(500).json({
       message : "Internal Server Error",
     }) 
@@ -79,7 +77,6 @@ export const getCategoryById = async(req:Request, res:Response)=>{
     })
     
   } catch (error) {
-    console.log("error in category controller,getCategoryById",error)
     return res.status(500).json({
       message : "Internal Server Error",
     })

@@ -99,10 +99,7 @@ export const createProduct = async (req:Request,res:Response)=>{
     });
 
     } catch (error) {
-    console.log(
-      "Error in product controller, createProduct",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -234,10 +231,6 @@ export const updateProduct = async (req: Request,res: Response) => {
       });
 
     } catch (error) {
-      console.log(
-        "Error in product controller, updateProduct",
-        error
-      );
 
       return res.status(500).json({
         message: "Internal Server Error",
@@ -276,10 +269,7 @@ export const deleteProduct = async (
     });
 
   } catch (error) {
-    console.log(
-      "Error in product controller, deleteProduct",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -298,10 +288,6 @@ export const getAllProducts = async (
       products,
     });
   } catch (error) {
-    console.log(
-      "Error in product controller, getAllProducts",
-      error
-    );
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -339,10 +325,7 @@ export const getProductById = async (
       product,
     });
   } catch (error) {
-    console.log(
-      "Error in product controller, getProductById",
-      error
-    );
+
 
     return res.status(500).json({
       message: "Internal Server Error",

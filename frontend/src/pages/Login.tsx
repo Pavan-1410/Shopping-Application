@@ -39,7 +39,7 @@ const { mutateAsync: fetchAdminMe, isPending: isAdminLoading } = useMutation({
 
     const handleGoogleLogin = async () => {
       try {
-        console.log("Selected Role:", selectedRole);
+        
 
         const result = await signInWithPopup(auth, googleProvider);
 
@@ -48,15 +48,7 @@ const { mutateAsync: fetchAdminMe, isPending: isAdminLoading } = useMutation({
         // Firebase ID Token
         const token = await user.getIdToken();
 
-      console.log("========== Firebase Login Success ==========");
-      console.log("Token:", token);
-      console.log("User:", user);
-      console.log("Firebase UID:", user.uid);
-      console.log("Email:", user.email);
-      console.log("Name:", user.displayName);
-      console.log("Photo URL:", user.photoURL);
-      console.log("Selected Role:", selectedRole);
-      console.log("============================================");
+
 
       // Call backend /me and /admin/me based on role
       let data;
@@ -67,7 +59,6 @@ const { mutateAsync: fetchAdminMe, isPending: isAdminLoading } = useMutation({
         data = await fetchMe(token);
       }
 
-      console.log("Backend Response:", data);
       navigate("/home");
 
     } catch (error:any) {

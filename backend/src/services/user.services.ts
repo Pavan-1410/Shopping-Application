@@ -18,7 +18,7 @@ export const findUserByFirebaseUid = async (firebaseUid: string) => {
     `,
     [firebaseUid]
   );
-  console.log("existing user found")
+ 
   return result.rows[0] || null;
 };
 
@@ -47,6 +47,6 @@ export const createUser = async (
     `,
     [firebaseUid, name, email]
   );
-  console.log("new user created")
+  
   return result.rows[0];
 };

@@ -32,7 +32,7 @@ function App() {
 
         const data = await checkAuth(token);
 
-        console.log("Session restored:", data);
+       
 
         authstore.setAuth(data.user, data.user.role,token);
         authstore.setLoading(false);
