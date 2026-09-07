@@ -13,6 +13,7 @@ interface Order {
 }
 
 const AdminOrders = () => {
+
   const { token } = useAuthStore();
   const queryClient = useQueryClient();
 
@@ -175,7 +176,10 @@ const AdminOrders = () => {
                         order.created_at
                       ).toLocaleDateString("en-IN")}
                     </p>
+                    
                   </div>
+            
+                
                 </div>
 
                 {/* Completed message */}

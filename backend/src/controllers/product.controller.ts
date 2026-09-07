@@ -1,7 +1,7 @@
-import { findCategoryById } from "../services/category.service";
-import { uploadProductImage } from "../services/image.services";
-import { deleteTheProduct, getAllProductsService, getProductByIdService, insertProduct, updateTheProduct } from "../services/product.services";
-import { CreateProductInput } from "../types/products.types";
+import { findCategoryById } from "../services/category.service.js";
+import { uploadProductImage } from "../services/image.services.js";
+import { deleteTheProduct, getAllProductsService, getProductByIdService, insertProduct, updateTheProduct } from "../services/product.services.js";
+import { CreateProductInput } from "../types/products.types.js";
 import { Request, Response } from "express";
 
 export const createProduct = async (req:Request,res:Response)=>{

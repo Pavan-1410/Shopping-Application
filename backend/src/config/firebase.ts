@@ -1,13 +1,13 @@
+import "dotenv/config";
 import { cert, getApps, initializeApp } from "firebase-admin/app";
-import serviceAccount from "../serviceAccountKey.json" with { type: "json" };
 
 const firebaseAdmin =
   getApps().length === 0
     ? initializeApp({
-        credential: cert({  // cert() creates Firebase Admin credentials from your service account JSON
-          projectId: serviceAccount.project_id,
-          clientEmail: serviceAccount.client_email,
-          privateKey: serviceAccount.private_key.replace(/\\n/g, "\n"),
+        credential: cert({
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+          privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
         }),
       })
     : getApps()[0];

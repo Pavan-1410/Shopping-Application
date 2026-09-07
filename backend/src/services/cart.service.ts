@@ -1,5 +1,5 @@
-import pool from "../config/db";
-import { AddToCartItemInput, Cart, CartItem, UpdateCartItemInput } from "../types/cart.types";
+import pool from "../config/db.js";
+import { AddToCartItemInput, Cart, CartItem, UpdateCartItemInput } from "../types/cart.types.js";
 
 // create cart  // one user have only one cart as constrain userId unique is there
 export const createCartService = async (userId: number): Promise<Cart> => {

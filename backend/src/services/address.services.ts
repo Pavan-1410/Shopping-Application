@@ -1,4 +1,4 @@
-import pool from "../config/db.ts";
+import pool from "../config/db.js";
 import { Address, CreateAddressInput } from "../types/address.types.js";
 
 // Create Address

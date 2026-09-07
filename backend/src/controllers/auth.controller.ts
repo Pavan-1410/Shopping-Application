@@ -1,6 +1,6 @@
 // controller contail the HTTP handling logic
 import { Request, Response } from "express";
-import { createUser, findUserByFirebaseUid } from "../services/user.services.ts";
+import { createUser, findUserByFirebaseUid } from "../services/user.services.js";
 
 export const getMe = async (req: Request, res: Response) => {
   try {

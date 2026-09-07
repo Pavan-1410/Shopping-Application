@@ -1,8 +1,8 @@
 import  express  from "express";
-import { createOrderController, getOrderByIdController, getOrderItemsController, getOrdersController, updateOrderStatusController } from "../controllers/order.controllers";
-import { verifyFirebaseToken } from "../middleware/auth.middleware";
-import { loadApplicationUser } from "../middleware/user.middleware";
-import { requireAdmin } from "../middleware/role.middleware";
+import { createOrderController, getOrderByIdController, getOrderItemsController, getOrdersController, updateOrderStatusController } from "../controllers/order.controllers.js";
+import { verifyFirebaseToken } from "../middleware/auth.middleware.js";
+import { loadApplicationUser } from "../middleware/user.middleware.js";
+import { requireAdmin } from "../middleware/role.middleware.js";
 
 const router = express.Router();
 

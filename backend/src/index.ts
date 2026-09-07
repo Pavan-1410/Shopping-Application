@@ -2,12 +2,13 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import categoryRoutes from "./routes/category.routes.ts";
-import authRoutes from "./routes/auth.routes.ts"
-import cartRoutes from "./routes/cart.routes.ts"
-import productRoutes from "./routes/product.routes.ts"
-import orderRoutes from "./routes/order.routes.ts"
-import addressRouter from "./routes/address.routes.ts"
+import categoryRoutes from "./routes/category.routes.js";
+import authRoutes from "./routes/auth.routes.js"
+import cartRoutes from "./routes/cart.routes.js"
+import productRoutes from "./routes/product.routes.js"
+import orderRoutes from "./routes/order.routes.js"
+import addressRouter from "./routes/address.routes.js"
+import paymentRoutes from "./routes/payment.routes.js"
 dotenv.config();
 
 const app = express();
@@ -43,6 +44,9 @@ app.use("/api/order",orderRoutes)
 
 // Address Router
 app.use("/api/address",addressRouter)
+
+// Payment Routes
+app.use("/api/payment",paymentRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

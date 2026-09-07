@@ -1,6 +1,6 @@
 import { Request,Response } from "express"
-import { createCategory, findAllCategories, findCategoryById,  } from "../services/category.service";
-import { getAllProductsService, getProductByIdService } from "../services/product.services";
+import { createCategory, findAllCategories, findCategoryById,  } from "../services/category.service.js";
+import { getAllProductsService, getProductByIdService } from "../services/product.services.js";
 export const addCategory = async (req:Request,res:Response)=>{
   try {
         const {name} = req.body;

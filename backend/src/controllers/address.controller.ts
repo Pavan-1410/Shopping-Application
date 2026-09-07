@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
-import { CreateAddressInput } from "../types/address.types";
-import { createAddress, getAddressById, getAddressesByUser } from "../services/address.services";
+import { CreateAddressInput } from "../types/address.types.js";
+import { createAddress, getAddressById, getAddressesByUser } from "../services/address.services.js";
 
 export const createAddressController = async (req:Request,res:Response)=> {
     try {
