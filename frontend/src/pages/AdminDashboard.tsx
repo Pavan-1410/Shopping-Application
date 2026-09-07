@@ -7,6 +7,7 @@ import {
 
 import { getAllCategories, getAllOrders, getAllProducts } from "../api/adminApi";
 import useAuthStore from "../store/authstore";
+import ProfitChart from "../components/ProfitChart";
 
 const DotsLoader = () => (
   <span className="flex items-center gap-1 pt-4">
@@ -100,6 +101,7 @@ const AdminDashboard = () => {
         </div>
 
       </div>
+      <ProfitChart token={token as string} />
     </div>
   );
 };

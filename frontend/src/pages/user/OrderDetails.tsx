@@ -23,6 +23,8 @@ import {
 import { getAllProducts } from "../../api/adminApi";
 
 import useAuthStore from "../../store/authstore";
+import queryClient from "../../lib/queryclient";
+import { createPayment, verifyPayment } from "../../api/payment.api";
 
 interface Order {
   order_id: string;
@@ -216,9 +218,46 @@ const OrderDetails = () => {
   // Payment
   // =========================
 
-  const handlePayment = () => {
-    toast.success("Payment successful!");
-  };
+const handlePayment = async (token: string, orderId: string) => {
+  try {
+    const razorpayOrder = await createPayment(token, orderId);
+
+    const options = {
+      key: "rzp_test_TZ6GbWdiQg0fFN",
+      amount: razorpayOrder.amount,
+      currency: razorpayOrder.currency,
+      order_id: razorpayOrder.id,
+      name: "Shopping",
+      description: `Payment for order #${orderId}`,
+      handler: async (response: any) => {
+        const verifyData = await verifyPayment(token, {
+          orderId,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature,
+        });
+
+        if (verifyData.success) {
+          toast.success("Payment successful!");
+          queryClient.invalidateQueries({ queryKey: ["orders"] }); // tells React Query to refetch
+        } else {
+          toast.error("Payment verification failed");
+        }
+      },
+      modal: {
+        ondismiss: () => {
+          toast.error("Payment cancelled");
+        },
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (err) {
+    console.error(err);
+    toast.error("Something went wrong");
+  }
+};
 
   return (
     <>
@@ -349,7 +388,7 @@ const OrderDetails = () => {
                 >
                   {!isCompleted && (
                     <div className="absolute inset-0 overflow-hidden rounded-full">
-                      <div className="absolute h-full w-12 animate-[progressShimmer_1.5s_linear_infinite] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                      <div className="absolute h-full w-12 animate-[progressShimmer_1.5s_linear_infinite] bg-linear-to-r from-transparent via-white/60 to-transparent" />
                     </div>
                   )}
                 </div>
@@ -594,8 +633,11 @@ const OrderDetails = () => {
               {/* Pay */}
 
               {!isPaid && (
+                
                 <button
-                  onClick={handlePayment}
+                  onClick={()=>{
+                    if(!token) return
+                    handlePayment(token, order.order_id)}}
                   className="flex items-center justify-center gap-2 rounded-lg bg-blue-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800"
                 >
                   <CreditCard size={17} />

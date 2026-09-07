@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/user/Navbar";
 import useAuthStore from "../../store/authstore";
 import { getAllOrders } from "../../api/orderApi";
+import { createPayment, verifyPayment } from "../../api/payment.api";
+import queryClient from "../../lib/queryclient";
 
 interface Order {
   order_id: string;
@@ -44,16 +46,48 @@ const MyOrders = () => {
 
   const orders: Order[] = orderResponse?.orders ?? [];
 
-  // =========================
-  // Temporary Payment
-  // =========================
+  //handling payment
 
-  const handlePayment = (orderId: string) => {
-    console.log("Payment for order:", orderId);
+const handlePayment = async (token: string, orderId: string) => {
+  try {
+    const razorpayOrder = await createPayment(token, orderId);
 
-    toast.success("Payment successful!");
-  };
+    const options = {
+      key: "rzp_test_TZ6GbWdiQg0fFN",
+      amount: razorpayOrder.amount,
+      currency: razorpayOrder.currency,
+      order_id: razorpayOrder.id,
+      name: "Shopping",
+      description: `Payment for order #${orderId}`,
+      handler: async (response: any) => {
+        const verifyData = await verifyPayment(token, {
+          orderId,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_signature: response.razorpay_signature,
+        });
 
+        if (verifyData.success) {
+          toast.success("Payment successful!");
+          queryClient.invalidateQueries({ queryKey: ["orders"] }); // tells React Query to refetch
+        } else {
+          toast.error("Payment verification failed");
+        }
+      },
+      modal: {
+        ondismiss: () => {
+          toast.error("Payment cancelled");
+        },
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  } catch (err) {
+    console.error(err);
+    toast.error("Something went wrong");
+  }
+};
   return (
     <>
       <Navbar />
@@ -226,7 +260,7 @@ const MyOrders = () => {
 
                             {!isCompleted && (
                               <div className="absolute inset-0 overflow-hidden rounded-full">
-                                <div className="absolute h-full w-12 animate-[progressShimmer_1.5s_linear_infinite] bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+                                <div className="absolute h-full w-12 animate-[progressShimmer_1.5s_linear_infinite] bg-linear-to-r from-transparent via-white/60 to-transparent" />
                               </div>
                             )}
                           </div>
@@ -345,7 +379,7 @@ const MyOrders = () => {
                         <div className="flex gap-5">
                         <button
                               onClick={() => navigate(`/orders/${order.order_id}`)}
-                              className="rounded-lg border border-blue-700 bg-blue-700 text-white px-5 py-2.5 text-sm font-medium text-blue-700 transition hover:bg-blue-50"
+                              className="rounded-lg border border-blue-700 bg-blue-700 text-white px-5 py-2.5 text-sm font-medium  transition hover:bg-blue-50"
                         >
                         View Details
                       </button>
@@ -356,12 +390,16 @@ const MyOrders = () => {
                               </p>
                             </div>
                           ) : (
-                            <button
-                              onClick={() =>
-                                handlePayment(order.order_id)
-                              }
-                              className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800 sm:w-auto"
-                            >
+                              <button
+                                onClick={() => {
+                                  if (!token) {
+                                    toast.error("Please login to continue");
+                                    return;
+                                  }
+                                  handlePayment(token, order.order_id);
+                                }}
+                                className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-700 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-blue-800 sm:w-auto"
+                              >
                               <CreditCard size={17} />
                               Pay
                             </button>
