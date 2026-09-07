@@ -51,15 +51,15 @@ const { mutateAsync: fetchAdminMe, isPending: isAdminLoading } = useMutation({
 
 
       // Call backend /me and /admin/me based on role
-      let data;
+   
 
-      if (selectedRole === "admin") {
-        data = await fetchAdminMe(token);
-      } else {
-        data = await fetchMe(token);
-      }
+if (selectedRole === "admin") {
+  await fetchAdminMe(token);
+} else {
+  await fetchMe(token);
+}
 
-      navigate("/home");
+navigate("/home");
 
     } catch (error:any) {
         console.error("Google login failed:", error);
