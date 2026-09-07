@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {getAllOrders, updateOrderStatus,} from "../api/orderApi";
 import useAuthStore from "../store/authstore";
-import { useNavigate } from "react-router-dom";
 
 interface Order {
   order_id: string;
@@ -14,7 +13,7 @@ interface Order {
 }
 
 const AdminOrders = () => {
-  const navigate = useNavigate();
+
   const { token } = useAuthStore();
   const queryClient = useQueryClient();
 
