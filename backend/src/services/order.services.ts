@@ -147,6 +147,16 @@ export const getOrdersByUser = async (userId: number): Promise<Order[]> => {
 
   return result.rows;
 };
+export const getOrders = async (): Promise<Order[]> => {
+  const result = await pool.query(
+    `
+    SELECT *
+    FROM orders
+    `,
+  );
+
+  return result.rows;
+};
 // get specific order
 export const getOrderById = async (orderId: number,userId: number): Promise<Order | undefined> => {     // undefine bacause order ID can be invalid or not in the DB
   const result = await pool.query(

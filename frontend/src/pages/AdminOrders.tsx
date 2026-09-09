@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {getAllOrders, updateOrderStatus,} from "../api/orderApi";
+import { getAllOrdersAdmin, updateOrderStatus,} from "../api/orderApi";
 import useAuthStore from "../store/authstore";
 
 interface Order {
@@ -20,7 +20,7 @@ const AdminOrders = () => {
   // Get all orders
   const { data, isLoading } = useQuery({
     queryKey: ["orders"],
-    queryFn: () => getAllOrders(token as string),
+    queryFn: () => getAllOrdersAdmin(token as string),
   });
 
   const orders: Order[] = data?.orders ?? [];

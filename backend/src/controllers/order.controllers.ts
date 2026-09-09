@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import {createOrderService, getOrdersByUser, getOrderById, getOrderItems,updateOrderStatus,} from "../services/order.services.js";
+import {createOrderService, getOrdersByUser, getOrderById, getOrderItems,updateOrderStatus, getOrders,} from "../services/order.services.js";
 import { CreateOrderInput } from "../types/order.types.js";
 
 // place order      //   only need to pass address_id from body
@@ -61,6 +61,22 @@ export const getOrdersController = async (req: Request,res: Response) => {
     }
 
     const orders = await getOrdersByUser(userId);
+
+    return res.status(200).json({
+      message: "Orders fetched successfully",
+      orders,
+    });
+  } catch (error) {
+
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+export const getOrderAdminCOntroller = async (req: Request,res: Response) => {
+  try {
+    const orders = await getOrders();
 
     return res.status(200).json({
       message: "Orders fetched successfully",
